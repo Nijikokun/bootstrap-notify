@@ -54,7 +54,7 @@
 
   onClose = function() {
     this.options.onClose();
-    $(this.$note).remove();
+    $(this.$note).remove().css("display", "");
     this.options.onClosed();
   };
 
