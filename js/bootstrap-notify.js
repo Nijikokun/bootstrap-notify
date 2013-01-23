@@ -50,7 +50,7 @@
           this.$note.prepend(link);
           //icon support
           if(this.options.icon)
-            this.$note.prepend('<i class="icon '+this.options.icon+'"></i>');
+            this.$note.prepend('<i class="icon ' + this.options.icon + '"></i>');
           
           return this;
         };
