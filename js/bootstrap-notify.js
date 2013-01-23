@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-(function ($) {
+ (function ($) {
   var Notification = function (element, options) {
     // Element collection
     this.$element = $(element);
@@ -29,63 +29,67 @@
       if(this.options.transition == 'fade')
         this.$note.addClass('in').addClass(this.options.transition);
       else this.$note.addClass(this.options.transition);
-    else this.$note.addClass('fade').addClass('in');
+      else this.$note.addClass('fade').addClass('in');
 
-    if(this.options.type)
-      this.$note.addClass('alert-' + this.options.type);
-    else this.$note.addClass('alert-success');
+      if(this.options.type)
+        this.$note.addClass('alert-' + this.options.type);
+      else this.$note.addClass('alert-success');
 
-    if(this.options.message)
-      if(typeof this.options.message === 'string')
-        this.$note.html(this.options.message);
-      else if(typeof this.options.message === 'object')
-        if(this.options.message.html)
-          this.$note.html(this.options.message.html);
-        else if(this.options.message.text)
-          this.$note.text(this.options.message.text);
+      if(this.options.message)
+        if(typeof this.options.message === 'string')
+          this.$note.html(this.options.message);
+        else if(typeof this.options.message === 'object')
+          if(this.options.message.html)
+            this.$note.html(this.options.message.html);
+          else if(this.options.message.text)
+            this.$note.text(this.options.message.text);
 
-    if(this.options.closable)
-      var link = $('<a class="close pull-right">&times;</a>');
-      $(link).on('click', $.proxy(onClose, this));
-      this.$note.prepend(link);
+          if(this.options.closable)
+            var link = $('<a class="close pull-right">&times;</a>');
+          $(link).on('click', $.proxy(onClose, this));
+          this.$note.prepend(link);
+          //icon support
+          if(this.options.icon)
+            this.$note.prepend('<i class="icon ' + this.options.icon + '"></i>');
+          
+          return this;
+        };
 
-    return this;
-  };
+        onClose = function() {
+          this.options.onClose();
+          $(this.$note).remove();
+          this.options.onClosed();
+        };
 
-  onClose = function() {
-    this.options.onClose();
-    $(this.$note).remove();
-    this.options.onClosed();
-  };
+        Notification.prototype.show = function () {
+          if(this.options.fadeOut.enabled)
+            this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(onClose, this));
 
-  Notification.prototype.show = function () {
-    if(this.options.fadeOut.enabled)
-      this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(onClose, this));
+          this.$element.append(this.$note);
+          this.$note.alert();
+        };
 
-    this.$element.append(this.$note);
-    this.$note.alert();
-  };
+        Notification.prototype.hide = function () {
+          if(this.options.fadeOut.enabled)
+            this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(onClose, this));
+          else onClose.call(this);
+        };
 
-  Notification.prototype.hide = function () {
-    if(this.options.fadeOut.enabled)
-      this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(onClose, this));
-    else onClose.call(this);
-  };
+        $.fn.notify = function (options) {
+          return new Notification(this, options);
+        };
 
-  $.fn.notify = function (options) {
-    return new Notification(this, options);
-  };
-
-  $.fn.notify.defaults = {
-    type: 'success',
-    closable: true,
-    transition: 'fade',
-    fadeOut: {
-      enabled: true,
-      delay: 3000
-    },
-    message: null,
-    onClose: function () {},
-    onClosed: function () {}
-  }
-})(window.jQuery);
+        $.fn.notify.defaults = {
+          type: 'success',
+          closable: true,
+          transition: 'fade',
+          fadeOut: {
+            enabled: true,
+            delay: 150000
+          },
+          icon:false,
+          message: null,
+          onClose: function () {},
+          onClosed: function () {}
+        }
+      })(window.jQuery);
