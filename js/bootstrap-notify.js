@@ -39,11 +39,16 @@
     if (this.options.message)
       if (typeof this.options.message === 'string')
         this.$note.html(this.options.message);
-      else if (typeof this.options.message === 'object')
+      else if (typeof this.options.message === 'object'){
+        
         if (this.options.message.html)
           this.$note.html(this.options.message.html);
         else if (this.options.message.text)
           this.$note.text(this.options.message.text);
+          
+        if (this.options.message.title)
+      	  this.$note.prepend($(this.options.titleTag, {text: this.options.message.title}));
+	  }
 
     if (this.options.closable)
       this._link = $('<a class="close pull-right">&times;</a>'),
@@ -63,7 +68,10 @@
     if (this.options.fadeOut.enabled)
       this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(Notification.onClose, this));
 
-    this.$element.append(this.$note);
+    if (this.options.stack == 'below')
+    	this.$element.append(this.$note);
+    else this.$element.prepend(this.$note);
+    
     this.$note.alert();
   };
 
@@ -86,6 +94,8 @@
       delay: 3000
     },
     message: null,
+    stack: 'below',
+    titleTag: '<h4>',
     onClose: function () {},
     onClosed: function () {}
   }
