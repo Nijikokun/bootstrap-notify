@@ -54,24 +54,100 @@
   };
 
   Notification.onClose = function () {
+    var that = this;
     this.options.onClose();
+    this.isShown = false
+    this.backdrop(function () {
+      that.removeBackdrop()
+      that.$element.trigger('hidden')
+    })
     $(this.$note).remove();
     this.options.onClosed();
   };
 
   Notification.prototype.show = function () {
+  	var that = this;
     if (this.options.fadeOut.enabled)
       this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(Notification.onClose, this));
+      
+    this.isShown = true
 
-    this.$element.append(this.$note);
+    this.backdrop(function () {
+      var transition = $.support.transition && that.$element.hasClass('fade')
+
+      if (!that.$element.parent().length) {
+        that.$element.appendTo(document.body) //don't move modals dom position
+      }
+
+      that.$element.show()
+
+      if (transition) {
+        that.$element[0].offsetWidth // force reflow
+      }
+
+      that.$element
+        .addClass('in')
+        .attr('aria-hidden', false)
+
+      transition ?
+        that.$element.one($.support.transition.end, function () { that.$element.focus().trigger('shown') }) :
+        that.$element.focus().trigger('shown')
+
+    })
+    
+    this.$element.append(this.$note).focus();
     this.$note.alert();
   };
 
   Notification.prototype.hide = function () {
+  	var that = this
     if (this.options.fadeOut.enabled)
       this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(Notification.onClose, this));
     else Notification.onClose.call(this);
   };
+  
+  Notification.prototype.removeBackdrop= function () {
+        this.$backdrop && this.$backdrop.remove()
+        this.$backdrop = null
+      };
+
+  Notification.prototype.backdrop= function (callback) {
+        var that = this
+          , animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+        if (this.isShown && this.options.backdrop) {
+          var doAnimate = $.support.transition && animate
+
+          this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+            .appendTo(document.body)
+
+          this.$backdrop.click(
+            this.options.backdrop == 'static' ?
+              $.proxy(this.$element[0].focus, this.$element[0])
+            : $.proxy(this.hide, this)
+          )
+
+          if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+          this.$backdrop.addClass('in')
+
+          if (!callback) return
+
+          doAnimate ?
+            this.$backdrop.one($.support.transition.end, callback) :
+            callback()
+
+        } else if (!this.isShown && this.$backdrop) {
+          this.$backdrop.removeClass('in')
+
+          $.support.transition && this.$element.hasClass('fade')?
+            this.$backdrop.one($.support.transition.end, callback) :
+            callback()
+
+        } else if (callback) {
+          callback()
+        }
+      };
 
   $.fn.notify = function (options) {
     return new Notification(this, options);
@@ -80,6 +156,7 @@
   $.fn.notify.defaults = {
     type: 'success',
     closable: true,
+    backdrop: false,
     transition: 'fade',
     fadeOut: {
       enabled: true,
