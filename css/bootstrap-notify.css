@@ -1,6 +1,52 @@
-.notifications{position:fixed;}.notifications.top-right{right:10px;top:25px;}
-.notifications.top-left{left:10px;top:25px;}
-.notifications.bottom-left{left:10px;bottom:25px;}
-.notifications.bottom-right{right:10px;bottom:25px;}
-.notifications>div{position:relative;z-index:9999;margin:5px 0px;}
-.notifications.center{top:48%;left:0;width:100%;}.notifications.center>div{margin:5px auto;width:20%;text-align:center;}
+/**
+ * Bootstrap-notify.less
+ *
+ * @author Vitaly @Laboratory
+ * @author Nijiko Yonskai
+ * @copyright 2012 Vitaly
+ * @copyright 2013 Nijiko Yonskai
+ */
+.notifications {
+  position: fixed;
+}
+.notifications.top-right {
+  right: 10px;
+  top: 10px;
+}
+.notifications.top-left {
+  left: 10px;
+  top: 10px;
+}
+.notifications.top {
+  top: 10px;
+  left: 0;
+  right: 0;
+}
+.notifications.top > div {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+.notifications.bottom-left {
+  left: 10px;
+  bottom: 10px;
+}
+.notifications.bottom-right {
+  right: 10px;
+  bottom: 10px;
+}
+.notifications > div {
+  position: relative;
+  z-index: 9999;
+  margin: 5px 0px;
+}
+.notifications.center {
+  top: 48%;
+  left: 0;
+  width: 100%;
+}
+.notifications.center > div {
+  margin: 5px auto;
+  width: 50%;
+  text-align: center;
+}
