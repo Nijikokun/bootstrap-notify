@@ -9,7 +9,7 @@
 
 @right: 10px;
 @left: @right;
-@top: 25px;
+@top: 10px;
 @bottom: @top;
 
 .notifications {
@@ -23,6 +23,18 @@
   &.top-left {
     left: @left;
     top: @top;
+  }
+
+  &.top {
+    top: @top;
+    left: 0;
+    right: 0;
+    > div {
+      margin: 0 auto;
+      width: 50%;
+      text-align: center;
+    }
+
   }
 
   &.bottom-left {
@@ -48,7 +60,7 @@
 
     > div {
       margin: 5px auto;
-      width: 20%;
+      width: 50%;
       text-align: center;
     }
   }
