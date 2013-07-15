@@ -45,6 +45,9 @@
         else if (this.options.message.text)
           this.$note.text(this.options.message.text);
 
+    if (this.options.message)
+			this.$note.prepend('<i style="color: ' + this.options.icon.color + ';" class="' + this.options.icon.symbol + '"></i> ');
+
     if (this.options.closable)
       this._link = $('<a class="close pull-right">&times;</a>'),
       $(this._link).on('click', $.proxy(Notification.onClose, this)),
