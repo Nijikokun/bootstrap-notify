@@ -89,6 +89,10 @@
       delay: 3000
     },
     message: null,
+		icon: {
+			symbol: null,
+			color: '#000'
+		},
     onClose: function () {},
     onClosed: function () {}
   }
