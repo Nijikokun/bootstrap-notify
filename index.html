@@ -9,8 +9,7 @@
 
     <!-- Le styles -->
     <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Notify CSS -->
     <link href="css/bootstrap-notify.css" rel="stylesheet">
@@ -35,7 +34,7 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="span3">
+        <div class="col-md-3">
           <div class="span12">&nbsp;</div>
 
           <div class="span3">
@@ -60,7 +59,8 @@
           <div class='notifications bottom-left'></div>
           <div class='notifications center'></div>
         </div>
-        <div class="span9">
+
+        <div class="col-md-9">
           <div class='page-header'>
             <h1>Twitter Bootstrap Extensions: Notifications</h1>
           </div>
@@ -186,15 +186,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="span3">
+        <div class="col-md-3">
           <div class="span12">&nbsp;</div>
 
           <div class="span3">
-            <button class='btn show-bangTidy'>bangTidy</button>
-            <button class='btn show-blackgloss'>blackgloss</button>
+            <button class='btn btn-info show-bangTidy'>bangTidy</button>
+            <button class='btn btn-info show-blackgloss'>blackgloss</button>
           </div>
         </div>
-        <div class="span9">
+        <div class="col-md-9">
           <div class='page-header'>
             <h1>Notifications: Custom Styles</h1>
           </div>
@@ -210,14 +210,17 @@
       </div>
     </div> <!-- /container -->
 
+    <style>
+      .btn { border: none; outline: none; }
+    </style>
+
     <!-- Le javascript
     ================================================== -->
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+    <script src="http://codeorigin.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="js/bootstrap-notify.js"></script>
     <script>
       // Random Messages
