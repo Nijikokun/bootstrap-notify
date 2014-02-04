@@ -12,6 +12,9 @@
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 
+		<!-- font awesome -->
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
     <!-- Notify CSS -->
     <link href="../css/bootstrap-notify.css" rel="stylesheet">
 
@@ -40,8 +43,8 @@
           <div class="span12">&nbsp;</div>
 
           <div class="span3">
-            <iframe src="http://nijikokun.github.com/github-buttons/github-btn.html?user=Nijikokun&repo=bootstrap-notify&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
-            <iframe src="http://nijikokun.github.com/github-buttons/github-btn.html?user=Nijikokun&repo=bootstrap-notify&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+            <iframe src="http://ghbtns.com/github-btn.html?user=lmarcon&repo=bootstrap-notify&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+            <iframe src="http://ghbtns.com/github-btn.html?user=lmarcon&repo=bootstrap-notify&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
 
             <br />
 
@@ -51,8 +54,16 @@
           <div class="span12">&nbsp;</div>
           <div class="span12">&nbsp;</div>
 
-          <div class="span12">
+          <div class="span12" style="margin-bottom: 10px;">
             <button class='btn btn-warning show-notification'>Click For A Random Notification</button>
+          </div>
+
+          <div class="span12" style="margin-bottom: 10px;">
+            <button class='btn btn-success show-success-notification'>Click For A Success Notification</button>
+          </div>
+
+          <div class="span12">
+            <button class='btn btn-danger show-error-notification'>Click For An Error Notification</button>
           </div>
 
           <div class='notifications top-right'></div>
@@ -240,6 +251,16 @@
           'You should star this!',
           'Holy cow, another alert!'
         ],
+				success: [
+					'Operation successful',
+					'You\'re the boss',
+					'All went fine'
+				],
+				error: [
+					'There was an error',
+					'Something went wrong',
+					'Uh-oh'
+				],
         positions: [
           'bottom-right',
           'bottom-left',
@@ -270,6 +291,14 @@
       // Basic Features, style isn't even required.
       $('.show-notification').click(function (e) {
         $('.' + select(example.positions)).notify({ message: { text: select(example.messages) }, type: select(example.styles) }).show();
+      });
+
+      $('.show-success-notification').click(function (e) {
+				$('.' + select(example.positions)).notify({ message: { text: select(example.success) }, type: 'success', icon: { symbol: 'icon-ok', color: '#5A5' } }).show();
+      });
+
+      $('.show-error-notification').click(function (e) {
+				$('.' + select(example.positions)).notify({ message: { text: select(example.error) }, type: 'danger', icon: { symbol: 'icon-warning-sign', color: '#D54' } }).show();
       });
 
       /* Custom Styles */

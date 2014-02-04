@@ -3,6 +3,37 @@ bootstrap-notify
 
 Bootstrap alert system made better.
 
+Added [Font Awesome](http://fortawesome.github.io/Font-Awesome/) support.
+It's now easy to customize your notifications. For example, you can create success and error messages:
+
+Code:
+
+		$('#success-button').click(function(){
+			$('#id').notify(
+				{ message: 
+					{ text: 'Great! Operation successful :)' },
+					type: 'success',
+					icon: {
+						symbol: 'icon-ok', 
+						color: '#5A5'
+					}
+				}
+			).show();
+		});
+
+		$('#error-button').click(function(){
+			$('#id').notify(
+				{ message: 
+					{ text: 'Uh-oh.. there was an error :(' },
+					type: 'danger',
+					icon: {
+						symbol: 'icon-warning-sign', 
+						color: '#D54'
+					}
+				}
+			).show();
+		});
+
 # Copyright
 
     Copyright 2013 Nijiko Yonskai @nijikokun
